@@ -20,9 +20,9 @@ contract Staker {
   
   event Stake(address _staker, uint256 _amount);
   
-  function stake(BigNumber _amount) public {
-    balances[msg.sender] += _amount;
-    emit Stake(msg.sender, _amount);
+  function stake() public payable{
+    balances[msg.sender] += msg.value;
+    emit Stake(msg.sender, msg.value);
   }
     
   // After some `deadline` allow anyone to call an `execute()` function
@@ -35,12 +35,13 @@ contract Staker {
   // Add a `withdraw()` function to let users withdraw their balance
 
 
+
   // Add a `timeLeft()` view function that returns the time left before the deadline for the frontend
 
 
   // Add the `receive()` special function that receives eth and calls stake()
   receive() external payable {
-    stake(msg.value);
+    stake();
   }
 
 }
