@@ -21,19 +21,20 @@ contract Staker {
   event Stake(address _staker, uint256 _amount);
   
   function stake() public payable{
-    require(block.timestamp < deadline, "Staking is closed");
+    require(block.timestamp < deadline, "Staking period is closed");
     balances[msg.sender] += msg.value;
     emit Stake(msg.sender, msg.value);
   }
     
   // After some `deadline` allow anyone to call an `execute()` function
   // If the deadline has passed and the threshold is met, it should call `exampleExternalContract.complete{value: address(this).balance}()`
-  uint256 public deadline = block.timestamp + 30 seconds;
-  bool openForWithdraw;
+  uint256 public deadline = block.timestamp + 2 days;
+  bool openForWithdraw = false;
   
   function execute() public notCompleted {
-    if (balances[msg.sender] >= threshold) {
-      exampleExternalContract.complete{value: balances[msg.sender]}();
+    require(block.timestamp >= deadline, "It is not yet time to execute");
+    if (address(this).balance >= threshold) {
+      exampleExternalContract.complete{value: address(this).balance}();
     } else {
       openForWithdraw = true;
     }
@@ -41,19 +42,20 @@ contract Staker {
 
   // If the `threshold` was not met, allow everyone to call a `withdraw()` function
   modifier notCompleted() {
-    require(block.timestamp >= deadline, "Action is available after deadline");
-    require(exampleExternalContract.complete == false, "Staking process is complete, Action is no longer available");
+    require(exampleExternalContract.completed() == false, "Staking process is complete, Action is no longer available");
     _;
   }
     
   // Add a `withdraw()` function to let users withdraw their balance
-  function withdraw() public notCompleted {
-    require(balances[msg.sender] < threshold, "Threshold is met, withdraw is not available");
-    require(openForWithdraw, "Withdraw is not available");
+  function withdraw() external notCompleted {
+    require(block.timestamp >= deadline, "It is not yet time to withdraw");
+    require(openForWithdraw, "Withdrawal is not available");
     require(balances[msg.sender] > 0, "No funds to withdraw");
     
-    openForWithdraw = true;
+    uint bal = balances[msg.sender];
+    balances[address(exampleExternalContract)] = 0;
     balances[msg.sender] = 0;
+    payable(msg.sender).transfer(bal);
   }
 
 
@@ -67,7 +69,7 @@ contract Staker {
 
   // Add the `receive()` special function that receives eth and calls stake()
   receive() external payable {
-    stake();
+    this.stake();
   }
 
 }
