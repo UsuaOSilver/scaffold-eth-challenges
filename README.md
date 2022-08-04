@@ -180,7 +180,7 @@ If the balance is less than the `threshold`, you want to set a `openForWithdraw`
 
 ⚙ If you get a permissions error `yarn surge` again until you get a unique URL, or customize it in the command line.
 
-> 📝 you will use this deploy URL to submit to [SpeedRunEthereum.com](https://speedrunethereum.com).
+> 📝 deploy URL: puzzling-ink.surge.sh
 
 🚔 Traffic to your url might break the [Infura](https://infura.io/) rate limit, edit your key: `constants.js` in `packages/ract-app/src`.
 
