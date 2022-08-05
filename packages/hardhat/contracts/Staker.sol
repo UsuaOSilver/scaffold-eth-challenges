@@ -53,9 +53,11 @@ contract Staker {
     require(balances[msg.sender] > 0, "No funds to withdraw");
     
     uint bal = balances[msg.sender];
-    balances[address(exampleExternalContract)] = 0;
-    balances[msg.sender] = 0;
+    balances[msg.sender] -= bal;
     payable(msg.sender).transfer(bal);
+    
+    /** - updating balance b4 transfering to prevent Reentrancy
+        - Suggest using call instead of transfer */
   }
 
 
