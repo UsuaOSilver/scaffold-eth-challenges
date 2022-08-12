@@ -25,9 +25,10 @@ If they defect, everyone gets their money back.
 What I learned:
 - The logic and priority of each condition allowing the use of the suitable action -- `require()` 
 - Check for the account balance before transfering to prevent Reentrancy attack
-- Prefer call() over transfer()
+- Prefer `call()` over `transfer()`
 
 Surge link:
+
 Netlify link:
 
 ---
