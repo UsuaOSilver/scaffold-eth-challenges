@@ -7,10 +7,15 @@
 ## 🚩 Challenge 0: 🎟 Simple NFT Example
 
 🎫 Create a simple NFT
+
 🏗 scaffold-eth.  
+
 👷‍♀️ HardHat to compile and deploy smart contracts. 
+
 React hooks app and Ethereum components
+
 🚀 Deploy an NFT to Rinkeby testnet 
+
 
 Surge link:
 
