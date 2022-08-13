@@ -34,7 +34,7 @@ What I learned:
 
 Surge link:
 
-Netlify link: silverstaking.netlify.app
+Netlify link: https://silverstaking.netlify.app/
 
 ---
 
