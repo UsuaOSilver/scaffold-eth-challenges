@@ -27,7 +27,7 @@ Surge link:
 If the users cooperate, the money is collected in a second smart contract. 
 If they defect, everyone gets their money back.
 
-What I learned:
+### What I learned:
 - The logic and priority of each condition allowing the use of the suitable action -- `require()` 
 - Check for the account balance before transfering to prevent Reentrancy attack
 - Prefer `call()` over `transfer()`
@@ -44,13 +44,19 @@ Netlify link: https://silverstaking.netlify.app/
 Create a vending machine that will buy and sell the currency. 
 Learn the "approve" pattern for ERC20s and how contract to contract interactions work.
 
-What I learned:
+### What I learned:
+
+Netlify link:
 
 ---
 
 ## 🚩 Challenge 4: Minimum Viable Exchange
 
 🎰 build/understand a simple dex with one token-pair (ERC20 BALLOONS ($BAL) and ETH)
+
+### What I learned:
+
+Netlify link:
 
 ---
 
