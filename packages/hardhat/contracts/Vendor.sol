@@ -10,16 +10,16 @@ contract Vendor is Ownable {
 
   YourToken public yourToken;
   
-  uint public constant tokenPerETH = 100;
+  uint public constant tokensPerEth = 100;
 
   constructor(address tokenAddress) {
     yourToken = YourToken(tokenAddress);
   }
 
   // ToDo: create a payable buyTokens() function:
-  function buyToken() public payable {
+  function buyTokens() public payable {
     
-    uint256 paidAmount = msg.value * tokenPerETH;
+    uint256 paidAmount = msg.value * tokensPerEth;
     
     yourToken.transfer(msg.sender, paidAmount);
     
@@ -28,6 +28,13 @@ contract Vendor is Ownable {
   }
 
   // ToDo: create a withdraw() function that lets the owner withdraw ETH
+  function withdraw() public payable{
+    require(_msgSender() == owner());
+    
+    uint256 amount = msg.value * 10 ** 18;
+    
+    yourToken.transfer(msg.sender, amount);
+  }
 
   // ToDo: create a sellTokens(uint256 _amount) function:
 
