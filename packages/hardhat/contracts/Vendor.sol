@@ -7,10 +7,12 @@ import "./YourToken.sol";
 contract Vendor is Ownable {
 
   event BuyTokens(address buyer, uint256 amountOfETH, uint256 amountOfTokens);
+  event SellTokens(address seller, uint256 amountOfETH, uint256 amountOfTokens);
 
   YourToken public yourToken;
   
-  uint public constant tokensPerEth = 100;
+  uint256 public constant tokensPerEth = 100;
+  uint256 public constant decimal = 10 ** 18;
 
   constructor(address tokenAddress) {
     yourToken = YourToken(tokenAddress);
@@ -28,14 +30,23 @@ contract Vendor is Ownable {
   }
 
   // ToDo: create a withdraw() function that lets the owner withdraw ETH
-  function withdraw() public payable{
-    require(_msgSender() == owner());
-    
-    uint256 amount = msg.value * 10 ** 18;
+  function withdraw() public payable onlyOwner {  
+    uint256 amount = msg.value * decimal;
     
     yourToken.transfer(msg.sender, amount);
   }
 
   // ToDo: create a sellTokens(uint256 _amount) function:
+  function sellTokens(uint256 amount) public {
+        
+    uint256 getAmount = amount / tokensPerEth;
+    yourToken.transferFrom(msg.sender, address(this), amount);
+    //yourToken.approve(address(this), amount);
+    payable(msg.sender).transfer(getAmount);
+    
+    emit SellTokens(msg.sender, getAmount, amount);
+  }
+  
+  receive() external payable{}
 
 }

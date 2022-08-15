@@ -6,6 +6,6 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract YourToken is ERC20 {
     constructor() ERC20("Sou", "SOU") {
-        _mint(msg.sender, 1000 * 10 ** 18); //0xaf613770cB500BdAb0ee5d8Cefe9D701C88D6486
+        _mint(msg.sender, 1000 * 10 ** 18); 
     }
 }
