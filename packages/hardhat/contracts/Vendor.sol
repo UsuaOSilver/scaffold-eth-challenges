@@ -30,10 +30,12 @@ contract Vendor is Ownable {
   }
 
   // ToDo: create a withdraw() function that lets the owner withdraw ETH
-  function withdraw() public payable onlyOwner {  
-    uint256 amount = msg.value * decimal;
+  function withdraw() external onlyOwner {  
+    //suggest using call() instead of transfer()
+    (bool success, ) = payable(msg.sender).call{value: address(this).balance}("");
+    require(success, "Transfer failed.");
     
-    yourToken.transfer(msg.sender, amount);
+    //payable(msg.sender).transfer(address(this).balance);
   }
 
   // ToDo: create a sellTokens(uint256 _amount) function:
