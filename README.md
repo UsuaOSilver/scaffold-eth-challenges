@@ -101,15 +101,16 @@ await vendor.transferOwnership("**YOUR FRONTEND ADDRESS**");
 
 #### 🥅 Goal
 
-- [X ] Can you sell tokens back to the vendor?
-- [X ] Do you receive the right amount of ETH for the tokens?
+- [X] Can you sell tokens back to the vendor?
+- [X] Do you receive the right amount of ETH for the tokens?
 
 #### ⚔️ Side Quest
 
-- [X ] Add Sell Token Events display.  
+- [X] Add Sell Token Events display.  
 
 #### ⚠️ Test it!
--  Now is a good time to run `yarn test` to run the automated testing function. It will test that you hit the core checkpoints.  You are looking for all green checkmarks and passing tests!
+
+Contract tested -- all pass.
 
 ----
 
@@ -128,5 +129,3 @@ await vendor.transferOwnership("**YOUR FRONTEND ADDRESS**");
 Vendor verified address: 0xaBa9c9c3e624Ca8D969C72CE99251b8974D0050e
 
 ---
-
-💬 Problems, questions, comments on the stack? Post them to the [Challenge 2 telegram channel](https://t.me/joinchat/IfARhZFc5bfPwpjq)
