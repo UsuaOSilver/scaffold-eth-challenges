@@ -46,7 +46,7 @@ Learn the "approve" pattern for ERC20s and how contract to contract interactions
 
 ### What I learned:
 
-Surge link: cute-touch.surge.sh
+Surge link: https://nimble-soap.surge.sh/
 
 ---
 
