@@ -46,7 +46,7 @@ Learn the "approve" pattern for ERC20s and how contract to contract interactions
 
 ### What I learned:
 
-Netlify link:
+Surge link: cute-touch.surge.sh
 
 ---
 
