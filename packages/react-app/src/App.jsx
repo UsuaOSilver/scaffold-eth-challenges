@@ -109,7 +109,7 @@ const walletLinkProvider = walletLink.makeWeb3Provider(`https://mainnet.infura.i
   Web3 modal helps us "connect" external wallets:
 */
 const web3Modal = new Web3Modal({
-  network: "mainnet", // Optional. If using WalletConnect on xDai, change network to "xdai" and add RPC info below for xDai chain.
+  network: "goerli", // Optional. If using WalletConnect on xDai, change network to "xdai" and add RPC info below for xDai chain.
   cacheProvider: true, // optional
   theme: "light", // optional. Change to "dark" for a dark theme.
   providerOptions: {
@@ -525,7 +525,7 @@ function App(props) {
   if (yourTokenBalance) {
     transferDisplay = (
       <div style={{ padding: 8, marginTop: 32, width: 420, margin: "auto" }}>
-        <Card title="Transfer tokens">
+        <Card title="Transfer SOUs">
           <div>
             <div style={{ padding: 8 }}>
               <AddressInput
@@ -555,7 +555,7 @@ function App(props) {
                 );
               }}
             >
-              Send Tokens
+              Send SOUs
             </Button>
           </div>
         </Card>
@@ -577,7 +577,7 @@ function App(props) {
               }}
               to="/"
             >
-              YourToken
+              Sou Token
             </Link>
           </Menu.Item>
           <Menu.Item key="/contracts">
@@ -595,7 +595,7 @@ function App(props) {
         <Switch>
           <Route exact path="/">
             <div style={{ padding: 8, marginTop: 32, width: 300, margin: "auto" }}>
-              <Card title="Your Tokens" extra={<a href="#">code</a>}>
+              <Card title="Sou Tokens" extra={<a href="#">code</a>}>
                 <div style={{ padding: 8 }}>
                   <Balance balance={yourTokenBalance} fontSize={64} />
                 </div>
@@ -604,7 +604,7 @@ function App(props) {
             {transferDisplay}
             <Divider />
             <div style={{ padding: 8, marginTop: 32, width: 300, margin: "auto" }}>
-              <Card title="Buy Tokens" extra={<a href="#">code</a>}>
+              <Card title="Buy SOU" extra={<a href="#">code</a>}>
                 <div style={{ padding: 8 }}>{tokensPerEth && tokensPerEth.toNumber()} tokens per ETH</div>
                 <div style={{ padding: 8 }}>
                   <Input
@@ -634,7 +634,7 @@ function App(props) {
                     }}
                     disabled={!tokenBuyAmount.valid}
                   >
-                    Buy Tokens
+                    Buy SOU
                   </Button>
                 </div>
               </Card>
@@ -643,7 +643,7 @@ function App(props) {
 
             <Divider />
             <div style={{ padding: 8, marginTop: 32, width: 300, margin: "auto" }}>
-              <Card title="Sell Tokens">
+              <Card title="Sell SOU">
                 <div style={{ padding: 8 }}>{tokensPerEth && tokensPerEth.toNumber()} tokens per ETH</div>
 
                 <div style={{ padding: 8 }}>
@@ -669,7 +669,7 @@ function App(props) {
                       disabled={true}
                       type={"primary"}
                     >
-                      Approve Tokens
+                      Approve SOU
                     </Button>
                     <Button
                       type={"primary"}
@@ -682,7 +682,7 @@ function App(props) {
                       }}
                       disabled={!tokenSellAmount.valid}
                     >
-                      Sell Tokens
+                      Sell SOU
                     </Button>
                   </div>
                   :
@@ -702,13 +702,13 @@ function App(props) {
                       }}
                       disabled={!tokenSellAmount.valid}
                       >
-                      Approve Tokens
+                      Approve SOU
                     </Button>
                     <Button
                       disabled={true}
                       type={"primary"}
                     >
-                      Sell Tokens
+                      Sell SOU
                     </Button>
                   </div>
                     }
@@ -718,7 +718,7 @@ function App(props) {
             </div>
             
             <div style={{ padding: 8, marginTop: 32 }}>
-              <div>Vendor Token Balance:</div>
+              <div>Vendor SOU Balance:</div>
               <Balance balance={vendorTokenBalance} fontSize={64} />
             </div>
 
@@ -728,7 +728,7 @@ function App(props) {
             </div>
 
             <div style={{ width: 500, margin: "auto", marginTop: 64 }}>
-              <div>Buy Token Events:</div>
+              <div>Buy SOU Events:</div>
               <List
                 dataSource={buyTokensEvents}
                 renderItem={item => {
@@ -738,12 +738,12 @@ function App(props) {
                       <Balance balance={item.args[1]} />
                       ETH to get
                       <Balance balance={item.args[2]} />
-                      Tokens
+                      SOUs
                     </List.Item>
                   );
                 }}
               />
-              <div>Sell Token Events:</div>
+              <div>Sell SOU Events:</div>
               <List
                 dataSource={sellTokensEvents}
                 renderItem={item => {
@@ -751,7 +751,7 @@ function App(props) {
                     <List.Item key={item.blockNumber + item.blockHash}>
                       <Address value={item.args[0]} ensProvider={mainnetProvider} fontSize={16} /> sold
                       <Balance balance={item.args[2]} />
-                      Tokens to get
+                      SOUs to get
                       <Balance balance={item.args[1]} />
                       ETH
                     </List.Item>
