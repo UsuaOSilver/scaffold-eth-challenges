@@ -50,7 +50,7 @@ Learn the "approve" pattern for ERC20s and how contract to contract interactions
 
 ### What I learned:
 
-Surge link: https://nimble-soap.surge.sh/
+Surge link: https://sou-vendor.surge.sh/
 
 repo link: https://github.com/UsuaOSilver/scaffold-eth-challenges/tree/challenge-2-token-vendor
 
