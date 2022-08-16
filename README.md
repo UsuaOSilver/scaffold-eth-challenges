@@ -2,72 +2,24 @@
 
 ## 🚩 Challenge 2: 🏵 Token Vendor 🤖
 
-
-> 🤖 Smart contracts are kind of like "always on" *vending machines* that **anyone** can access. Let's make a decentralized, digital currency. Then, let's build an unstoppable vending machine that will buy and sell the currency. We'll learn about the "approve" pattern for ERC20s and how contract to contract interactions work.  
-
-> 🏵 Create `YourToken.sol` smart contract that inherits the **ERC20** token standard from OpenZeppelin. Set your token to `_mint()` **1000** (\* 10 \*\* 18) tokens to the `msg.sender`. Then create a `Vendor.sol` contract that sells your token using a payable `buyTokens()` function.
+> 🏵 `YourToken.sol` smart contract inherits the **ERC20** token standard from OpenZeppelin. Set your token to `_mint()` **1000** (\* 10 \*\* 18) tokens to the `msg.sender`.
+>  `Vendor.sol` contract sells your token using a payable `buyTokens()` function.
 
 > 🎛 Edit the frontend that invites the user to `<input\>` an amount of tokens they want to buy. We'll display a preview of the amount of ETH (or USD) it will cost with a confirm button.
 
-> 🔍 It will be important to verify your token's source code in the block explorer after you deploy. Supporters will want to be sure that it has a fixed supply and you can't just mint more.
+> 🔍 Your token's source code is verified in the block explorer after deployment. 
 
-> 🌟 The final deliverable is an app that lets users purchase your ERC20 token, transfer it, and sell it back to the vendor. Deploy your contracts on your public chain of choice and then `yarn build` and `yarn surge` your app to a public web server. Submit the url on [SpeedRunEthereum.com](https://speedrunethereum.com)!
-
-> 💬 Meet other builders working on this challenge and get help in the [Challenge 2 telegram](https://t.me/joinchat/IfARhZFc5bfPwpjq)!
-
-🧫 Everything starts by ✏️ Editing `YourToken.sol` in `packages/hardhat/contracts`
+> 🌟 The final deliverable is an app that lets users purchase your ERC20 token, transfer it, and sell it back to the vendor.
 
 ---
-
-### Checkpoint 0: 📦 install 📚
-
-```bash
-git clone https://github.com/scaffold-eth/scaffold-eth-challenges challenge-2-token-vendor
-cd challenge-2-token-vendor
-git checkout challenge-2-token-vendor
-yarn install
-```
-
-🔏 Edit your smart contract `YourToken.sol` in `packages/hardhat/contracts`
-
----
-
-### Checkpoint 1: 🔭 Environment 📺
-
-You'll have three terminals up for:
-
-```bash
-yarn chain   (hardhat backend)
-yarn start   (react app frontend)
-yarn deploy  (to compile, deploy, and publish your contracts to the frontend)
-```
-
-> 👀 Visit your frontend at http://localhost:3000
-
-> 👩‍💻 Rerun `yarn deploy --reset` whenever you want to deploy new contracts to the frontend.
-
-> ignore any warnings, we'll get to that...
 
 ---
 
 ### Checkpoint 2: 🏵Your Token 💵
 
-> 👩‍💻 Edit `YourToken.sol` to inherit the **ERC20** token standard from OpenZeppelin
+> 👩‍💻 `YourToken.sol` to inherit the **ERC20** token standard from OpenZeppelin
 
-> Mint **1000** (\* 10 \*\* 18) to your frontend address using the `constructor()`.
-
-(Your frontend address is the address in the top right of http://localhost:3000)
-
-> You can `yarn deploy --reset` to deploy your contract until you get it right.
-
-#### 🥅 Goals
-
-- [ ] Can you check the `balanceOf()` your frontend address in the **YourToken** of the `Debug Contracts` tab?
-- [ ] Can you `transfer()` your token to another account and check _that_ account's `balanceOf`?
-
-(Use an incognito window to create a new address and try sending to that new address. Use the `transfer()` function in the `Debug Contracts` tab.)
-
----
+> Mint **1000** (\* 10 \*\* 18) to the frontend address using the `constructor()`.
 
 ### Checkpoint 3: ⚖️ Vendor 🤖
 
@@ -174,43 +126,19 @@ await vendor.transferOwnership("**YOUR FRONTEND ADDRESS**");
 
 ----
 
-### Checkpoint 5: 💾 Deploy it! 🛰
-
-📡 Edit the `defaultNetwork` in `packages/hardhat/hardhat.config.js`, as well as `targetNetwork` in `packages/react-app/src/App.jsx`, to [your choice of public EVM networks](https://ethereum.org/en/developers/docs/networks/)
-
-👩‍🚀 You will want to run `yarn account` to see if you have a **deployer address**.
-
-🔐 If you don't have one, run `yarn generate` to create a mnemonic and save it locally for deploying.
-
-🛰 Use a faucet like [faucet.paradigm.xyz](https://faucet.paradigm.xyz/) to fund your **deployer address** (run `yarn account` again to view balances)
-
-> 🚀 Run `yarn deploy` to deploy to your public network of choice (😅 wherever you can get ⛽️ gas)
-
-🔬 Inspect the block explorer for the network you deployed to... make sure your contract is there.
+### Checkpoint 5: 💾 Deploy to Goerli! 🛰
 
 ---
 ### Checkpoint 6: 🚢 Ship it! 🚁
 
-📦 Run `yarn build` to package up your frontend.
+📦 Run `yarn build` to package up the frontend.
 
-💽 Upload your app to surge with `yarn surge` (you could also `yarn s3` or maybe even `yarn ipfs`?)
-
->  😬 Windows users beware!  You may have to change the surge code in `packages/react-app/package.json` to just `"surge": "surge ./build",`
-
-⚙ If you get a permissions error `yarn surge` again until you get a unique URL, or customize it in the command line.
-
-🚔 Traffic to your url might break the [Infura](https://infura.io/) rate limit, edit your key: `constants.js` in `packages/react-app/src`.
+💽 Upload the app to surge with `yarn surge` with  `"surge": "surge ./build",` in `packages/react-app/package.json`
 
 ---
 ### Checkpoint 7: 📜 Contract Verification
 
-Update the `api-key` in `packages/hardhat/package.json`. You can get your key [here](https://etherscan.io/myapikey).
-
-> Now you are ready to run the `yarn verify --network your_network` command to verify your contracts on etherscan 🛰
-
-👀 You may see an address for both YouToken and Vendor.  You will want the Vendor address.
-
-👉 This will be the URL you submit to 🏃‍♀️[SpeedRunEthereum.com](https://speedrunethereum.com).
+Vendor verified address: 0xaBa9c9c3e624Ca8D969C72CE99251b8974D0050e
 
 ---
 
