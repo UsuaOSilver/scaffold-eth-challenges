@@ -50,22 +50,17 @@ Use a price variable named `tokensPerEth` set to **100**:
 - [X] Able to transfer tokens to a different account
 
 
-> 📝 Call `transferOwnership()` on the `Vendor` to make *your frontend address* the `owner`:
+> 📝 Call `transferOwnership()` on the `Vendor` to make *your frontend address* the `owner`
 
 #### 🥅 Goals
 
-- [ ] Is your frontend address the `owner` of the `Vendor`?
+- [X] Is your frontend address the `owner` of the `Vendor`?
 
-> 📝 Finally, add a `withdraw()` function in `Vendor.sol` that lets the owner withdraw ETH from the vendor.
+> 📝 `withdraw()` function in `Vendor.sol` that lets the owner withdraw ETH from the vendor.
 
 #### 🥅 Goals
 
-- [ ] Can **only** the `owner` withdraw the ETH from the `Vendor`?
-
-#### ⚔️ Side Quests
-
-- [ ] Can _anyone_ withdraw? Test _everything_!
-- [ ] What if you minted **2000** and only sent **1000** to the `Vendor`?
+- [X] **Only** the `owner` can withdraw the ETH from the `Vendor`
 
 ---
 
