@@ -19,6 +19,8 @@
 
 > Mint **1000** (\* 10 \*\* 18) to the frontend address using the `constructor()`.
 
+---
+
 ### Checkpoint 3: ⚖️ Vendor 🤖
 
 > 👩‍💻 **payable** `buyTokens()` function in `Vendor.sol` contract 
