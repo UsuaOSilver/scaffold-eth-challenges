@@ -16,6 +16,8 @@ React hooks app and Ethereum components
 
 🚀 Deploy an NFT to Rinkeby testnet 
 
+repo link: https://github.com/UsuaOSilver/scaffold-eth-challenges/tree/challenge-0-simple-nft
+
 
 Surge link:
 
@@ -36,6 +38,8 @@ Surge link:
 
 Netlify link: https://silverstaking.netlify.app/
 
+repo link: https://github.com/UsuaOSilver/scaffold-eth-challenges/tree/challenge-1-decentralized-staking
+
 ---
 
 ## 🚩 Challenge 2: 🏵 Token Vendor
@@ -48,6 +52,8 @@ Learn the "approve" pattern for ERC20s and how contract to contract interactions
 
 Surge link: https://nimble-soap.surge.sh/
 
+repo link: https://github.com/UsuaOSilver/scaffold-eth-challenges/tree/challenge-2-token-vendor
+
 ---
 
 ## 🚩 Challenge 4: Minimum Viable Exchange
@@ -57,6 +63,8 @@ Surge link: https://nimble-soap.surge.sh/
 ### What I learned:
 
 Netlify link:
+
+repo link: 
 
 ---
 
