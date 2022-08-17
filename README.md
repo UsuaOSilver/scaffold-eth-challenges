@@ -64,7 +64,7 @@ repo link: https://github.com/UsuaOSilver/scaffold-eth-challenges/tree/challenge
 
 Netlify link:
 
-repo link: 
+repo link: https://github.com/UsuaOSilver/scaffold-eth-challenges/tree/challenge-4-dex
 
 ---
 
