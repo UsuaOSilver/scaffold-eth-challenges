@@ -36,12 +36,12 @@ contract DEX {
     /**
      * @notice Emitted when liquidity provided to DEX and mints LPTs.
      */
-    event LiquidityProvided();
+    event LiquidityProvided(address from, uint256 amountMinted, uint256 ethDeposit, uint256 tokenDeposit);
 
     /**
      * @notice Emitted when liquidity removed from DEX and decreases LPT count within DEX.
      */
-    event LiquidityRemoved();
+    event LiquidityRemoved(address indexed to, uint256 amountRemoved, uint256 ethWithdrawn, uint256 tokenWithdrawn);
 
     /* ========== CONSTRUCTOR ========== */
 
@@ -95,7 +95,7 @@ contract DEX {
     function ethToToken() public payable returns (uint256 tokenOutput) {
         
         uint256 ethInput = msg.value; //amount of ETH sent to DEX
-        uint256 ethReserve = address(this).balance; //amount of ETH in DEX
+        uint256 ethReserve = address(this).balance - msg.value; //amount of ETH in DEX
         uint256 balReserve = token.balanceOf(address(this)); //amount of tokens in DEX
         uint256 balOutput = price(ethInput, ethReserve, balReserve); //amount of $BAL returned from DEX
         
@@ -135,11 +135,42 @@ contract DEX {
      * NOTE: user has to make sure to give DEX approval to spend their tokens on their behalf by calling approve function prior to this function call.
      * NOTE: Equal parts of both assets will be removed from the user's wallet with respect to the price outlined by the AMM.
      */
-    function deposit() public payable returns (uint256 tokensDeposited) {}
+    function deposit() public payable returns (uint256 tokensDeposited) {
+        uint256 ethReserve = address(this).balance - msg.value;
+        uint256 tokenReserve = token.balanceOf(address(this));
+        uint256 tokenDeposit;
+        
+        tokenDeposit = ((msg.value * tokenReserve) / ethReserve) + 1;
+        uint256 liquidityMinted = msg.value * totalLiquidity /ethReserve;
+        liquidity[msg.sender] = liquidity[msg.sender] + liquidityMinted;
+        totalLiquidity = totalLiquidity + liquidityMinted;
+        
+        require(token.transferFrom(msg.sender, address(this), tokenDeposit));
+        emit LiquidityProvided(msg.sender, liquidityMinted, msg.value, tokenDeposit);
+        return tokenDeposit;
+    }
 
     /**
      * @notice allows withdrawal of $BAL and $ETH from liquidity pool
      * NOTE: with this current code, the msg caller could end up getting very little back if the liquidity is super low in the pool. I guess they could see that with the UI.
      */
-    function withdraw(uint256 amount) public returns (uint256 eth_amount, uint256 token_amount) {}
+    function withdraw(uint256 amount) public returns (uint256 eth_amount, uint256 token_amount) {
+        require(liquidity[msg.sender] >= amount, "DEX: withdraw - not enough liquidity"); //ensures that user has enough liquidity to withdraw
+        uint256 ethReserve = address(this).balance;
+        uint256 tokenReserve = token.balanceOf(address(this));
+        uint256 ethWithdrawn;
+        
+        ethWithdrawn = ((amount * ethReserve) / totalLiquidity);
+        
+        uint256 tokenAmount = amount * tokenReserve / totalLiquidity;
+        liquidity[msg.sender] = liquidity[msg.sender] - amount;
+        totalLiquidity = totalLiquidity - amount;
+        
+        (bool sent, ) = msg.sender.call{value: ethWithdrawn}(""); 
+        require(sent, "DEX: withdraw - revert in transferring eth to you!"); //ensures that transfer from contract to DEX was successful
+        require(token.transfer(msg.sender, tokenAmount));
+        
+        emit LiquidityRemoved(msg.sender, amount, ethWithdrawn, tokenAmount);
+        return (ethWithdrawn, tokenAmount);
+    }
 }
