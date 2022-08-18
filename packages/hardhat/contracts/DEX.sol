@@ -26,12 +26,12 @@ contract DEX {
     /**
      * @notice Emitted when ethToToken() swap transacted
      */
-    event EthToTokenSwap();
+    event EthToTokenSwap(address indexed sender, string ethToTokenName, uint256 amountETH, uint256 amountBAL);
 
     /**
      * @notice Emitted when tokenToEth() swap transacted
      */
-    event TokenToEthSwap();
+    event TokenToEthSwap(address indexed sender, string tokenNameToEth, uint256 amountETH, uint256 amountBAL);
 
     /**
      * @notice Emitted when liquidity provided to DEX and mints LPTs.
@@ -85,17 +85,49 @@ contract DEX {
      * if you are using a mapping liquidity, then you can use `return liquidity[lp]` to get the liquidity for a user.
      *
      */
-    function getLiquidity(address lp) public view returns (uint256) {}
+    function getLiquidity(address lp) public view returns (uint256) {
+        
+    }
 
     /**
      * @notice sends Ether to DEX in exchange for $BAL
      */
-    function ethToToken() public payable returns (uint256 tokenOutput) {}
+    function ethToToken() public payable returns (uint256 tokenOutput) {
+        
+        uint256 ethInput = msg.value; //amount of ETH sent to DEX
+        uint256 ethReserve = address(this).balance; //amount of ETH in DEX
+        uint256 balReserve = token.balanceOf(address(this)); //amount of tokens in DEX
+        uint256 balOutput = price(ethInput, ethReserve, balReserve); //amount of $BAL returned from DEX
+        
+        require(ethInput > 0, "DEX: ethToToken - 0 amount ETH sent"); //ensures that amount of ETH sent is greater than 0
+        
+        // payable(address(this)).transfer(ethInput);
+        
+        require(token.transfer(payable(msg.sender), balOutput), "DEX: ethToToken - transfer did not transact"); //transfers $BAL from DEX to contract
+        
+        emit EthToTokenSwap(msg.sender, "$ETH to $BAL", ethInput, balOutput); //emits event when ethToToken() transacts
+        return balOutput;
+    }
 
     /**
      * @notice sends $BAL tokens to DEX in exchange for Ether
      */
-    function tokenToEth(uint256 tokenInput) public returns (uint256 ethOutput) {}
+    function tokenToEth(uint256 tokenInput) public returns (uint256 ethOutput) {
+        
+        require(tokenInput > 0, "DEX: tokenToEth - 0 amount $BAL sent"); //ensures that amount of $BAL sent is greater than 0
+        
+        uint256 ethReserve = address(this).balance; //amount of ETH in DEX
+        uint256 balReserve = token.balanceOf(address(this)); //amount of tokens in DEX
+        uint256 ethOutput = price(tokenInput, balReserve, ethReserve); //amount of $ETH returned from DEX
+        
+        require(token.transferFrom(address(this), msg.sender, tokenInput)); //transfers $BAL from contract to DEX
+        
+        (bool sent, ) = msg.sender.call{value: ethOutput}(""); //transfers $ETH from contract to DEX
+        require(sent, "DEX: tokenToEth - transfer did not transact"); //ensures that transfer from contract to DEX was successful
+        
+        emit TokenToEthSwap(msg.sender, "$BAL to $ETH", tokenInput, ethOutput); //emits event when tokenToEth() transacts
+        return ethOutput;
+    }
 
     /**
      * @notice allows deposits of $BAL and $ETH to liquidity pool
