@@ -260,12 +260,14 @@ function App(props) {
 
   const EthToTokenSwapEvents = useEventListener(readContracts, "DEX", "EthToTokenSwap", localProvider, 1);
   console.log("⟠ -->🎈 EthToTokenSwapEvents:", EthToTokenSwapEvents);
-  // const TokenToEthSwapEvents = useEventListener(readContracts, "DEX", "TokenToEthSwap", 1);
-  // // console.log("🎈-->⟠ TokenToEthSwapEvents:", TokenToEthSwapEvents);
-  // const LiquidityProvidedEvents = useEventListener(readContracts, "DEX", "LiquidityProvided", 1);
-  // // console.log("➕ LiquidityProvidedEvents:", LiquidityProvidedEvents);
-  // const LiquidityRemovedEvents = useEventListener(readContracts, "DEX", "LiquidityRemoved", 1);
-  // // console.log("➖ LiquidityRemovedEvents:", LiquidityRemovedEvents);
+  const TokenToEthSwapEvents = useEventListener(readContracts, "DEX", "TokenToEthSwap", 1);
+  console.log("🎈-->⟠ TokenToEthSwapEvents:", TokenToEthSwapEvents);
+  const ApprovalEvents = useEventListener(readContracts, "DEX", "Approval", 1);
+  console.log("✅ ApprovalEvents:", ApprovalEvents);
+  const LiquidityProvidedEvents = useEventListener(readContracts, "DEX", "LiquidityProvided", 1);
+  console.log("➕ LiquidityProvidedEvents:", LiquidityProvidedEvents);
+  const LiquidityRemovedEvents = useEventListener(readContracts, "DEX", "LiquidityRemoved", 1);
+  console.log("➖ LiquidityRemovedEvents:", LiquidityRemovedEvents);
 
   return (
     <div className="App">
