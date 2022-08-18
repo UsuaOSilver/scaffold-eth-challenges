@@ -33,7 +33,7 @@ export default function Events({ contracts, contractName, eventName, localProvid
           : eventName === "TokenToEthSwap"
           ? "🎈-->⟠ Address | Trade | AmountOut | AmountIn"
           : eventName === "Approval"
-          ? "✅ Address | Amount"
+          ? "✅ Address| Amount"
           : eventName === "LiquidityProvided"
           ? "➕ Address | Liquidity Minted | Eth In | Balloons In"
           : "➖ Address | Liquidity Withdrawn | ETH out | Balloons Out "}
