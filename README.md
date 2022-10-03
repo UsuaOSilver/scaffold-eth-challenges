@@ -18,9 +18,6 @@ React hooks app and Ethereum components
 
 repo link: https://github.com/UsuaOSilver/scaffold-eth-challenges/tree/challenge-0-simple-nft
 
-
-Surge link:
-
 ---
 
 ## 🚩 Challenge 1: 🥩 Decentralized Staking App
